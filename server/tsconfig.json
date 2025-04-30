@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true, // This option can help avoid issues with conflicting types
+    "outDir": "./dist",
+    "typeRoots": ["node_modules/@types"], // Ensure this is included
+    "types": ["node", "express"] // Explicitly include the `express` types
+  },
+  "include": ["src/**/*.ts"]
+}
