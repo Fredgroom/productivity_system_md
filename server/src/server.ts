@@ -51,6 +51,10 @@ app.post(
     console.log('📩 Received request at /save-markdown');
     console.log('📝 Body:', req.body);
     const { filename, content } = req.body;
+    const frontmatter = `---
+created:${Date.now()}
+---
+`;
 
     if (!filename) {
       res.status(400).json({
@@ -63,8 +67,8 @@ app.post(
 
     const safeFilename = filename.replace(/[^a-z0-9_]/gi, '_');
     const filePath = path.join(saveDir, `${safeFilename}.md`);
-
-    await fs.promises.writeFile(filePath, content ?? '');
+    const newContent = content ? frontmatter + content : '';
+    await fs.promises.writeFile(filePath, newContent ?? '');
     console.log('✅ Response: File Saved');
     res.send('File saved.');
   })
